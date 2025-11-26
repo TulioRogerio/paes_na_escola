@@ -126,9 +126,6 @@ const Layout = ({ children }) => {
       <main className="main-content">
         <header className="header">
           <h1>PAES na Escola</h1>
-          <div className="header-actions">
-            <span className="user-info">Josemar [Técnico do PAES]</span>
-          </div>
         </header>
         <div className="content">{children}</div>
       </main>

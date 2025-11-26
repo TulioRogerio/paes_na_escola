@@ -1,70 +1,69 @@
-import { useState, useMemo, useCallback } from 'react'
-import './Agendamento.css'
+import { useState, useMemo, useCallback } from "react";
+import "./Agendamento.css";
 
-const SRES = ['SRE Vitória', 'SRE Cachoeiro', 'SRE Colatina', 'SRE Linhares']
+const SRES = ["SRE Vitória", "SRE Cachoeiro", "SRE Colatina", "SRE Linhares"];
 const MUNICIPIOS = {
-  'SRE Vitória': ['Vitória', 'Vila Velha', 'Serra', 'Cariacica'],
-  'SRE Cachoeiro': ['Cachoeiro de Itapemirim', 'Castelo', 'Itapemirim'],
-  'SRE Colatina': ['Colatina', 'Baixo Guandu', 'São Gabriel da Palha'],
-  'SRE Linhares': ['Linhares', 'São Mateus', 'Aracruz'],
-}
+  "SRE Vitória": ["Vitória", "Vila Velha", "Serra", "Cariacica"],
+  "SRE Cachoeiro": ["Cachoeiro de Itapemirim", "Castelo", "Itapemirim"],
+  "SRE Colatina": ["Colatina", "Baixo Guandu", "São Gabriel da Palha"],
+  "SRE Linhares": ["Linhares", "São Mateus", "Aracruz"],
+};
 const ESCOLAS = {
-  Vitória: ['EEEF João Silva', 'EEEF Maria Santos', 'EEEF Pedro Costa'],
-  'Vila Velha': ['EEEF Vila Velha 1', 'EEEF Vila Velha 2'],
-}
-const TRIMESTRES = ['1º Trimestre', '2º Trimestre', '3º Trimestre']
+  Vitória: ["EEEF João Silva", "EEEF Maria Santos", "EEEF Pedro Costa"],
+  "Vila Velha": ["EEEF Vila Velha 1", "EEEF Vila Velha 2"],
+};
+const TRIMESTRES = ["1º Trimestre", "2º Trimestre", "3º Trimestre"];
 
 const FORM_INITIAL_STATE = {
-  sre: '',
-  municipio: '',
-  escola: '',
-  data: '',
-  horario: '',
-  trimestre: '',
-  equipe: '',
-  observacoes: '',
-}
+  sre: "",
+  municipio: "",
+  escola: "",
+  data: "",
+  horario: "",
+  trimestre: "",
+  equipe: "",
+  observacoes: "",
+};
 
 const Agendamento = () => {
-  const [formData, setFormData] = useState(FORM_INITIAL_STATE)
+  const [formData, setFormData] = useState(FORM_INITIAL_STATE);
 
   const municipiosDisponiveis = useMemo(
     () => (formData.sre ? MUNICIPIOS[formData.sre] || [] : []),
     [formData.sre]
-  )
+  );
 
   const escolasDisponiveis = useMemo(
     () => (formData.municipio ? ESCOLAS[formData.municipio] || [] : []),
     [formData.municipio]
-  )
+  );
 
   const handleChange = useCallback((e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
       // Limpar campos dependentes
-      ...(name === 'sre' && { municipio: '', escola: '' }),
-      ...(name === 'municipio' && { escola: '' }),
-    }))
-  }, [])
+      ...(name === "sre" && { municipio: "", escola: "" }),
+      ...(name === "municipio" && { escola: "" }),
+    }));
+  }, []);
 
   const handleSubmit = useCallback(
     (e) => {
-      e.preventDefault()
-      console.log('Dados do agendamento:', formData)
-      alert('Visita técnica agendada com sucesso!')
-      setFormData(FORM_INITIAL_STATE)
+      e.preventDefault();
+      console.log("Dados do agendamento:", formData);
+      alert("Visita técnica agendada com sucesso!");
+      setFormData(FORM_INITIAL_STATE);
     },
     [formData]
-  )
+  );
 
   return (
     <div className="agendamento">
       <div className="page-header">
         <div>
           <h2>Agendamento de Visitas Técnicas</h2>
-          <p>Agende as visitas técnicas trimestrais nas escolas</p>
         </div>
       </div>
 
@@ -248,8 +247,7 @@ const Agendamento = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Agendamento
-
+export default Agendamento;
